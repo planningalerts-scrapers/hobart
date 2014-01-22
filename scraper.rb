@@ -2,6 +2,7 @@ require 'scraperwiki'
 require 'nokogiri'
 require 'open-uri'
 require 'date'
+require 'cgi'
 
 url = "http://www.hobartcity.com.au/go/AdvertisedApps/output.html"
 doc = Nokogiri::HTML(open(url))
