@@ -19,7 +19,7 @@ doc = Nokogiri::HTML(open(url, :ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE))
 
 applications = doc.css('div.result').collect do |result|
   page_info = {}
-  # page_info['address'] = result.css('a')[0].text.strip  Addresses are stored inconsistently here. Use the detail page.
+  # page_info['address'] = result.css('a')[0].text.strip  # Addresses are stored inconsistently here. Use detail page.
   page_info['council_reference'] = result.css('a')[1].text.strip
   info_url = result.css('a')[0]['href']
   info_url.slice!('../..')
@@ -44,6 +44,8 @@ applications = doc.css('div.result').collect do |result|
   unless location_div.nil?  # The location will always be provided though right?
     page_info['address'] = location_div.at_css('a').text
   end
+  # Scraping the document links is fun but can't be saved in the DB structure so don't do it.
+=begin
   pdfs = Array.new
   table = page.at_css('table')
   unless table.nil?  # Sometimes there is no documents table.
@@ -64,17 +66,20 @@ applications = doc.css('div.result').collect do |result|
   page_info['other_info'] = {
       documents: pdfs
   }
+=end
 
   page_info
 end
 
+# Uncomment this to additionally output JSON.
+json = applications.to_json
+puts json
+
 applications.each do |record|
-  if ScraperWiki.select("* from data where `council_reference`='#{record['council_reference']}'").empty?
+  if (ScraperWikiMorph.select("* from data where `council_reference`='#{record['council_reference']}'").empty? rescue true)
     ScraperWiki.save_sqlite(['council_reference'], record)
+    puts 'Saving record ' + record['council_reference']
   else
-    puts "Skipping already saved record " + record['council_reference']
+    puts 'Skipping already saved record ' + record['council_reference']
   end
 end
-
-# json = applications.to_json
-# puts json
