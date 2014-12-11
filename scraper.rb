@@ -6,7 +6,7 @@ require 'cgi'
 require 'json'
 
 # The council's app will only ever show 10 applications at a time,
-# sorted alphabetically (regardless of requested sort order.)
+# sorted alphabetically (regardless of requested sort order).
 # By keeping the time window small (1 week) there will hopefully never be more than 10 applications to be consumed.
 url = 'https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?d=lastweek&k=LodgementDate&t=PLN'
 
@@ -16,6 +16,8 @@ url = 'https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?d=l
 
 # The site rejects non-secure HTTP requests, but appears to have a broken SSL certificate(?).
 doc = Nokogiri::HTML(open(url, :ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE))
+
+comment_url = 'mailto:hcc@hobartcity.com.au?Subject='
 
 applications = doc.css('div.result').collect do |result|
   page_info = {}
@@ -32,48 +34,24 @@ applications = doc.css('div.result').collect do |result|
   d = a[2].strip.split('/')
   page_info['date_received'] = d[2] + '-' + d[1] + '-' + d[0]
   page_info['date_scraped'] = Date.today.to_s
+  page_info['comment_url'] = comment_url + CGI::escape("Planning Application Enquiry: " + page_info['council_reference'])
 
   # Now scrape the detail page for additional information and a more consistently formatted address.
   # (Adding this step slows the scraper significantly.)
   page = Nokogiri::HTML(open(page_info['info_url'], :ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE))
+
   contact_div = page.at_css('div#b_ctl00_ctMain1_info_Officer')
   unless contact_div.nil?
     page_info['council_contact'] = contact_div.text.strip
   end
+
   location_div = page.at_css('div#b_ctl00_ctMain1_info_prop')
   unless location_div.nil?  # The location will always be provided though right?
     page_info['address'] = location_div.at_css('a').text
   end
-  # Scraping the document links is fun but can't be saved in the DB structure so don't do it.
-=begin
-  pdfs = Array.new
-  table = page.at_css('table')
-  unless table.nil?  # Sometimes there is no documents table.
-    table.css('tr').collect do |tr|
-      pdf_url = tr.css('td')[0].at_css('a')['href']
-      pdf_url.slice!('../..')
-      pdf_url = 'https://apply.hobartcity.com.au' + pdf_url
-      pdf_name = tr.css('td')[1].text.strip
-      pdf_date = tr.css('td')[2].text.strip
-      pdf = {
-          url: pdf_url,
-          name: pdf_name,
-          date: pdf_date
-      }
-      pdfs << pdf
-    end
-  end
-  page_info['other_info'] = {
-      documents: pdfs
-  }
-=end
 
   page_info
 end
-
-# Uncomment this to additionally output JSON.
-json = applications.to_json
-puts json
 
 applications.each do |record|
   if (ScraperWikiMorph.select("* from data where `council_reference`='#{record['council_reference']}'").empty? rescue true)
