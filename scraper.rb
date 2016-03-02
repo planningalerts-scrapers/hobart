@@ -1,25 +1,27 @@
 require 'scraperwiki'
-require 'nokogiri'
-require 'open-uri'
-require 'date'
+require 'mechanize'
 require 'cgi'
-require 'json'
-
-# The council's app will only ever show 10 applications at a time,
-# sorted alphabetically (regardless of requested sort order).
-# By keeping the time window small (1 week) there will hopefully never be more than 10 applications to be consumed.
-url = 'https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?d=lastweek&k=LodgementDate&t=PLN'
-
-# Some other example views that can be used:
-# url = 'https://apply.hobartcity.com.au/Pages/xc.track/reportApplications.aspx?t=PLN&k=Locality&p=0&d=o&snapshot=y&s=Dynnyrne'
-# url = 'https://apply.hobartcity.com.au/Pages/xc.track/reportApplications.aspx?id=PieListMap&t=PLN&k=Locality&p=0&d=o&snapshot=y&s=Battery+Point'
-
-# The site rejects non-secure HTTP requests, but appears to have a broken SSL certificate(?).
-doc = Nokogiri::HTML(open(url, :ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE))
 
 comment_url = 'mailto:hcc@hobartcity.com.au?Subject='
 
-applications = doc.css('div.result').collect do |result|
+agent = Mechanize.new
+agent.agent.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+agent.get('https://apply.hobartcity.com.au/Common/Common/terms.aspx')
+form = agent.page.form_with(:id => 'aspnetForm')
+button = form.button_with(:name => 'ctl00$ctMain$BtnAgree')
+
+# Prevent "unsupported content-encoding: gzip,gzip" error.
+agent.content_encoding_hooks << lambda { |httpagent, uri, response, body_io|
+  response['Content-Encoding'] = 'gzip'
+}
+
+agent.submit(form, button)
+
+# Now we can get to the page with the data.
+page = agent.get('https://apply.hobartcity.com.au/CurrentlyAdvertised')
+
+applications = page.search('.result').collect do |result|
   page_info = {}
   # page_info['address'] = result.css('a')[0].text.strip  # Addresses are stored inconsistently here. Use detail page.
   page_info['council_reference'] = result.css('a')[1].text.strip
@@ -38,14 +40,14 @@ applications = doc.css('div.result').collect do |result|
 
   # Now scrape the detail page for additional information and a more consistently formatted address.
   # (Adding this step slows the scraper significantly.)
-  page = Nokogiri::HTML(open(page_info['info_url'], :ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE))
+  detail_page = agent.get(page_info['info_url'])
 
-  contact_div = page.at_css('div#b_ctl00_ctMain1_info_Officer')
+  contact_div = detail_page.at_css('div#b_ctl00_ctMain_info_Officer')
   unless contact_div.nil?
-    page_info['council_contact'] = contact_div.text.strip
+    page_info['council_contact'] = contact_div.text.gsub(/\s+/, ' ').strip  # Remove carriage returns.
   end
 
-  location_div = page.at_css('div#b_ctl00_ctMain1_info_prop')
+  location_div = detail_page.at_css('div#b_ctl00_ctMain_info_prop')
   unless location_div.nil?  # The location will always be provided though right?
     page_info['address'] = location_div.at_css('a').text
   end
