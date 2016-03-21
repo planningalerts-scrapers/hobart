@@ -34,7 +34,14 @@ applications = page.search('.result').collect do |result|
   a = s.split("\n")
   page_info['description'] = a[0].strip
   d = a[2].strip.split('/')
-  page_info['date_received'] = d[2] + '-' + d[1] + '-' + d[0]
+
+  if d.any?
+    page_info['date_received'] = d[2] + '-' + d[1] + '-' + d[0]
+  else
+    puts "Malformed date_received:"
+    puts result.text
+  end
+
   page_info['date_scraped'] = Date.today.to_s
   page_info['comment_url'] = comment_url + CGI::escape("Planning Application Enquiry: " + page_info['council_reference'])
 
