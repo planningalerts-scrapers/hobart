@@ -51,7 +51,7 @@ results.each do |result|
     'address'           => address,
     'description'       => description,
     'info_url'          => info_url,
-    'comment_url'       => comment_url + council_reference,
+    'comment_url'       => comment_url,
     'date_scraped'      => Date.today.to_s,
     'date_received'     => date_received
   }
