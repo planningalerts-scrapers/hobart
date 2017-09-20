@@ -13,7 +13,7 @@ puts "Getting '" + period + "' data, changable via MORPH_PERIOD environment";
 
 url_base    = 'https://apply.hobartcity.com.au'
 da_url      = url_base + '/Pages/XC.Track/SearchApplication.aspx?d=' + period + '&k=LodgementDate&t=PLN'
-comment_url = 'mailto:hcc@hobartcity.com.au'
+comment_url = 'mailto:coh@hobartcity.com.au'
 
 # setup agent and turn off gzip as council web site returning 'encoded-content: gzip,gzip'
 agent = Mechanize.new
