@@ -1,85 +1,85 @@
 ---
 - council_reference: 19-323
-  address: 45 Kelly Street Battery Point Tas 7004
   description: Change of Use to Visitor Accommodation (Bed and Breakfast)
+  date_received: '2019-06-03'
+  address: 45 Kelly Street Battery Point Tas 7004
+  date_scraped: '2019-05-15'
   info_url: https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?id=179902
-  date_scraped: '2019-05-15'
-  date_received: '2019-06-03'
 - council_reference: 19-324
-  address: 3 Argyle Street Hobart Tas 7000
   description: Alterations
+  date_received: '2019-06-03'
+  address: 3 Argyle Street Hobart Tas 7000
+  date_scraped: '2019-05-15'
   info_url: https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?id=179502
-  date_scraped: '2019-05-15'
-  date_received: '2019-06-03'
 - council_reference: 19-325
+  description: Partial Demolition, Alterations and Extension
+  date_received: '2019-06-03'
   address: 2 French Street Sandy Bay Tas 7005
-  description: Partial Demolition, Alterations and Extension
+  date_scraped: '2019-05-15'
   info_url: https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?id=179966
-  date_scraped: '2019-05-15'
-  date_received: '2019-06-03'
 - council_reference: 19-326
+  description: Partial Demolition and Alterations
+  date_received: '2019-06-03'
   address: 321 - 323 Elizabeth Street North Hobart Tas 7000
-  description: Partial Demolition and Alterations
+  date_scraped: '2019-05-15'
   info_url: https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?id=179738
-  date_scraped: '2019-05-15'
-  date_received: '2019-06-03'
 - council_reference: 19-327
-  address: 59 - 61 York Street Sandy Bay Tas 7005
   description: Partial Change of Use to Visitor Accommodation
+  date_received: '2019-06-03'
+  address: 59 - 61 York Street Sandy Bay Tas 7005
+  date_scraped: '2019-05-15'
   info_url: https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?id=179930
-  date_scraped: '2019-05-15'
-  date_received: '2019-06-03'
 - council_reference: 19-328
-  address: 1 Fisher Lane Sandy Bay Tas 7005
   description: Partial Demolition, Outbuilding and Alterations to Car Parking
+  date_received: '2019-06-03'
+  address: 1 Fisher Lane Sandy Bay Tas 7005
+  date_scraped: '2019-05-15'
   info_url: https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?id=179982
-  date_scraped: '2019-05-15'
-  date_received: '2019-06-03'
 - council_reference: 19-329
+  description: Partial Demolition and Alterations
+  date_received: '2019-06-03'
   address: 92 Grosvenor Street Sandy Bay Tas 7005
-  description: Partial Demolition and Alterations
+  date_scraped: '2019-05-15'
   info_url: https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?id=179988
-  date_scraped: '2019-05-15'
-  date_received: '2019-06-03'
 - council_reference: 19-330
-  address: Melville Street Hobart Tas 7000
   description: Signage
-  info_url: https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?id=179280
-  date_scraped: '2019-05-15'
   date_received: '2019-06-03'
+  address: Melville Street Hobart Tas 7000
+  date_scraped: '2019-05-15'
+  info_url: https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?id=179280
 - council_reference: 19-331
-  address: 132 New Town Road New Town Tas 7008
   description: Outbuilding
+  date_received: '2019-06-04'
+  address: 132 New Town Road New Town Tas 7008
+  date_scraped: '2019-05-15'
   info_url: https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?id=179984
-  date_scraped: '2019-05-15'
-  date_received: '2019-06-04'
 - council_reference: 19-332
+  description: Partial Demolition, Alterations and Extension
+  date_received: '2019-06-04'
   address: 91 Letitia Street North Hobart Tas 7000
-  description: Partial Demolition, Alterations and Extension
+  date_scraped: '2019-05-15'
   info_url: https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?id=179986
-  date_scraped: '2019-05-15'
-  date_received: '2019-06-04'
 - council_reference: 19-333
-  address: 16 Oberon Court Dynnyrne Tas 7005
   description: Partial Demolition, Alterations and Extension
+  date_received: '2019-06-04'
+  address: 16 Oberon Court Dynnyrne Tas 7005
+  date_scraped: '2019-05-15'
   info_url: https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?id=173401
-  date_scraped: '2019-05-15'
-  date_received: '2019-06-04'
 - council_reference: 19-334
-  address: 27 - 29 Federal Street North Hobart Tas 7000
   description: Partial Demolition, Alterations, Signage and Change of Use to Storage
-  info_url: https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?id=179942
-  date_scraped: '2019-05-15'
   date_received: '2019-06-04'
+  address: 27 - 29 Federal Street North Hobart Tas 7000
+  date_scraped: '2019-05-15'
+  info_url: https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?id=179942
 - council_reference: 19-335
+  description: Partial Demolition and Alterations
+  date_received: '2019-06-05'
   address: 71 A New Town Road New Town Tas 7008
-  description: Partial Demolition and Alterations
+  date_scraped: '2019-05-15'
   info_url: https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?id=173821
-  date_scraped: '2019-05-15'
-  date_received: '2019-06-05'
 - council_reference: 19-336
-  address: 2 Churchill Avenue Sandy Bay Tas 7005
   description: Partial Demolition and Alterations
-  info_url: https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?id=180066
-  date_scraped: '2019-05-15'
   date_received: '2019-06-05'
+  address: 2 Churchill Avenue Sandy Bay Tas 7005
+  date_scraped: '2019-05-15'
+  info_url: https://apply.hobartcity.com.au/Pages/XC.Track/SearchApplication.aspx?id=180066
