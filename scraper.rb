@@ -2,7 +2,7 @@ require 'scraperwiki'
 require 'mechanize'
 
 url_base    = 'https://apply.hobartcity.com.au'
-da_url      = url_base + '/Pages/XC.Track/SearchApplication.aspx?d=thisweek&k=LodgementDate&t=PLN'
+da_url      = url_base + '/Pages/XC.Track/SearchApplication.aspx?d=last14days&k=LodgementDate&t=PLN'
 
 # setup agent and turn off gzip as council web site returning 'encoded-content: gzip,gzip'
 agent = Mechanize.new
