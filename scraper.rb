@@ -5,7 +5,5 @@ IconScraper.scrape_with_params(
   period: "last14days",
   types: ["PLN"]
 ) do |record|
-  record["council_reference"].gsub!("PLN-", "")
-  record["address"] = record["address"].gsub(",", "").split(" ").map(&:capitalize).join(" ")
   IconScraper.save(record)
 end
