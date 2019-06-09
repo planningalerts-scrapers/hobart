@@ -7,8 +7,9 @@ GIT
       httpclient
       sqlite_magic
 
-PATH
-  remote: ../icon_scraper
+GIT
+  remote: https://github.com/planningalerts-scrapers/icon_scraper.git
+  revision: ed012a78f040a8a20c0da4c7c42a1be4192d59f6
   specs:
     icon_scraper (0.1.0)
       activesupport
